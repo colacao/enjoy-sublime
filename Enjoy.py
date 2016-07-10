@@ -49,6 +49,21 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			sublime.message_dialog("当前文件=="+dirs+"\n"+"用户输入=="+name+"\n"+"enjoy目录=="+checkenjoy(dirs)+"\n"+"命令参数=="+args['id'])
 		 
 
-		print(args['id'])
-		self.view.window().show_input_panel('请输入项目名称','Test',on_done,on_change,on_cancel)
 
+		dirs = self.view.window().extract_variables()['file_path']
+		enjoy = checkenjoy(dirs)
+		if (args['id']=="init"):
+			self.view.window().show_input_panel('请输入项目名称','Test',on_done,on_change,on_cancel)
+	
+		if(args['id']=="start"):
+			sublime.message_dialog("cd "+enjoy+"\\rn"+" && "+"react-native start")
+			os.system("cd "+enjoy+"/rn"+" && "+"react-native start")
+
+		if(args['id']=="build" and not args['value']=="h5"):
+			sublime.message_dialog(args['id']+"===="+args['value'])
+			os.system("cd "+enjoy+""+" && "+"enjoy build --rn")
+
+		if(args['id']=="build" and args['value']=="h5"):
+			sublime.message_dialog("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
+			print("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
+			os.system("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")

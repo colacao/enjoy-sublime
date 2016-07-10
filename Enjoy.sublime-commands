@@ -32,12 +32,12 @@
     {
         "caption": "Enjoy:Build andrlid",
         "command": "enjoy",
-        "args":{"id": "bulid","value":"android"}
+        "args":{"id": "build","value":"android"}
     },
     {
         "caption": "Enjoy:Build h5",
         "command": "enjoy",
-        "args":{"id": "bulid","value":"h5"}
+        "args":{"id": "build","value":"h5"}
     },
      {
         "caption": "Enjoy:Build weixin",
