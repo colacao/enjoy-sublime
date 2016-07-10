@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.2",
+  "packages": [{
+    "name": "enjoy",
+    "description": "基于react native，使用html,css,js来开发的",
+    "author": "colacao",
+    "homepage": "https://github.com/colacao/enjoy-sublime",
+    "last_modified": "最后修改的日期时间",
+    "platforms": {
+      "*": [{
+        "version": "1.2",
+        "url": "https://github.com/colacao/enjoy-sublime/zip/1.2"
+      }]
+    }
+  }]
+}
