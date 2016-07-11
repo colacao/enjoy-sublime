@@ -3,9 +3,30 @@ import os
 import os.path
 import time
 import sys
-
-
+import subprocess
+from . import SublimeHelper as SH
+from . import OsShell
 class EnjoyCommand(sublime_plugin.TextCommand):
+	def __init__(self,num):
+		print('HelloEnjoy')
+
+	def get_view_and_window(self, view=None):
+	  if view is None:
+	      view = self.view
+
+	  if view is not None:
+	      window = view.window()
+
+	  # But if the view doesn't have a window, or there is no view at
+	  # all, then use the active window and view as set in the Sublime
+	  # module:
+	  #
+	  if view is None or window is None:
+	      window = sublime.active_window()
+	      view = window.active_view()
+
+	  return view, window
+
 	def run(self, edit,**args):
 		def on_cancel():
 			return
@@ -28,12 +49,25 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			if  os.path.exists(path+"/enjoy.json"):
 				return path;
 			else:
-				return checkenjoy(GetParentPath(path))
+				spath = GetParentPath(path);
+				if not spath=="/":
+					return checkenjoy(spath)
+				else:
+					return ""
 
 		def on_done(name):
-			desktop =  os.path.expanduser('~')	+"\Desktop"	
-			os.system("cd "+desktop+" "+" && "+"enjoy init " + name)
-			
+			print(self.rn)
+			print(self.enjoy)
+			desktop =  os.path.expanduser('~')	+"/Desktop"	
+			print("cd "+desktop+" "+" && "+"enjoy init " + name)
+			self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
+			self.progress.start()
+			def _C2(output):
+				print(output)
+				if output is None:
+					self.progress.stop()
+
+			OsShell.process("cd "+desktop+" "+" && "+"/Users/user/.node/bin/enjoy init " + name,_C2)
 		 
 
 
@@ -47,18 +81,52 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			dir1 = dirs['file_path']
 			enjoy = checkenjoy(dir1)
 			if(enjoy and args['id']=="start"):
-				os.system("cd "+enjoy+"/rn"+" && "+"react-native start")
+				print("cd "+enjoy+"/rn"+" && "+"react-native start")
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "服务启动中...", 250)
+				self.progress.start()
+				def _C2(output):
+					print(output)
+					if output is None:
+						self.progress.stop()
+
+				OsShell.process("cd "+enjoy+"/rn"+" && "+"/Users/user/.node/bin/react-native start",_C2)
+
 
 			if(enjoy and  args['id']=="build" and not args['value']=="h5"):
-				os.system("cd "+enjoy+""+" && "+"enjoy build --rn")
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
+				self.progress.start()
+				def _C2(output):
+					if output is None:
+						self.progress.stop()
+
+				OsShell.process("cd "+enjoy+""+" && "+"/Users/user/.node/bin/enjoy build --rn",_C2)
+
 
 			if(enjoy and args['id']=="build" and args['value']=="h5"):
 				print("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
-				os.system("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
+				# abc = os.popen("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
+				self.progress.start()
+				def _C2(output):
+					print(output)
+					if output is None:
+						self.progress.stop()
+
+				OsShell.process("cd "+enjoy+""+" && "+"/Users/user/.node/bin/enjoy build --web && cd web && webpack",_C2)
 
 			if(enjoy and  args['id']=="run"):
 				print("cd "+enjoy+""+" && "+"enjoy run --"+args['value'])
-				os.system("cd "+enjoy+""+" && "+"enjoy run --"+args['value'])
+				# os.system("cd "+enjoy+""+" && "+"enjoy run --"+args['value'])
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
+				self.progress.start()
+				def _C2(output):
+					print(output)
+					if output is None:
+						self.progress.stop()
+
+				OsShell.process("cd "+enjoy+""+" && "+"/Users/user/.node/bin/enjoy run --"+args['value'],_C2)
+		 
 		else:
 			if (not args['id']=="init"):
 				sublime.message_dialog("当前文件不属于enjoy项目")
+
