@@ -8,8 +8,10 @@ from . import SublimeHelper as SH
 from . import OsShell
 class EnjoyCommand(sublime_plugin.TextCommand):
 	def get_settings(self):
-	  settings = sublime.load_settings('Enjoy.sublime-settings')
-	  return settings
+		settings = self.view.settings().get('Enjoy')
+		if settings is None:
+			settings = sublime.load_settings('Enjoy.sublime-settings')
+		return settings
 
 	def get_view_and_window(self, view=None):
 	  if view is None:
@@ -27,7 +29,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 	def run(self, edit,**args):
 		self.rn = self.get_settings().get('rn-path')
 		self.enjoy = self.get_settings().get('enjoy-path')
-
+		print(self.rn)
 		def on_cancel():
 			return
 
@@ -59,18 +61,29 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			print(self.rn)
 			print(self.enjoy)
 			desktop =  os.path.expanduser('~')	+"/Desktop"	
-			print("cd "+desktop+" "+" && "+"enjoy init " + name)
+			print("cd "+desktop+" "+" && "+"enjoy init " + name )
 			self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
 			self.progress.start()
 			def _C2(output):
 				print(output)
 				if output is None:
 					self.progress.stop()
+					print("cd "+desktop+"/"+name+"/rn && npm update ")
+					def _C9(output):
+						print(output)
+						self.progress = SH.ProgressDisplay(self.view, "Enjoy", "安装依赖...", 250)
+						self.progress.start()
+						if output is None:
+							self.progress.stop()
+							sublime.message_dialog("项目"+name+"准备就绪,开始你的enjoy之旅")
+
+
+					OsShell.process("cd "+desktop+"/"+name+"/rn && npm update ",_C9)
 
 			OsShell.process("cd "+desktop+" "+" && "+self.enjoy+" init " + name,_C2)
 		 
 
-		LOCAL = '/usr/local/bin:/usr/local/sbin:/Users/user/.node/bin'
+		LOCAL = '/usr/local/bin:/usr/local/sbin:~/.node/bin'
 		os.environ['PATH'] += ':'
 		os.environ['PATH'] += LOCAL
 		dirs = self.view.window().extract_variables()
@@ -90,6 +103,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					print(output)
 					if output is None:
 						self.progress.stop()
+
 
 				OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" start",_C2)
 
