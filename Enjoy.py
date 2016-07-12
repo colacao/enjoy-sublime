@@ -102,7 +102,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					if output is None:
 						self.progress.stop()
 				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
-				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --rn",_C2)
+				OsShell.process("cd "+enjoy+""+" && "+"enjoy build --rn",_C2)
 
 
 			if(enjoy and args['id']=="build" and args['value']=="h5"):
