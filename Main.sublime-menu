@@ -1,0 +1,137 @@
+[
+    {
+        "id": "tools",
+        "caption": "Tools",
+        "children":
+        [
+            {
+                "id": "enjoy",
+                "caption": "Enjoy",
+                "children": [
+    {
+        "caption": "Enjoy:start ",
+        "command": "enjoy",
+        "args":{"id": "start","value":""}
+    },
+    {
+        "caption": "Enjoy:init ",
+        "command": "enjoy",
+        "args":{"id": "init","value":""}
+    },
+    {
+        "caption": "Enjoy:Run iOS",
+        "command": "enjoy",
+        "args":{"id": "run","value":"ios"}
+
+    },
+     {
+        "caption": "Enjoy:Run android",
+        "command": "enjoy",
+        "args":{"id": "run","value":"android"}
+    },
+     {
+        "caption": "Enjoy:Run h5",
+        "command": "enjoy",
+        "args":{"id": "run","value":"h5"}
+    }, {
+        "caption": "Enjoy:Build iOS",
+        "command": "enjoy",
+        "args":{"id": "build","value":"ios"}
+    },
+    {
+        "caption": "Enjoy:Build andrlid",
+        "command": "enjoy",
+        "args":{"id": "build","value":"android"}
+    },
+    {
+        "caption": "Enjoy:Build h5",
+        "command": "enjoy",
+        "args":{"id": "build","value":"h5"}
+    },
+     {
+        "caption": "Enjoy:Build weixin",
+        "command": "enjoy",
+        "args":{"id": "build","value":"weixin"}
+    }
+]
+
+            }
+        ]
+    },
+    {
+        "caption": "Preferences",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "Enjoy",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/enjoy-sublime/README.md"
+                                },
+                                "caption": "README"
+                            },
+                            { "caption": "-" },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/enjoy-sublime/Enjoy.sublime-settings"
+                                },
+                                "caption": "Settings – Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Enjoy.sublime-settings"
+                                },
+                                "caption": "Settings – User"
+                            },
+                            // { "caption": "-" },
+                            // {
+                            //     "command": "open_file",
+                            //     "args": {
+                            //         "file": "${packages}/Enjoy/Default.sublime-keymap"
+                            //     },
+                            //     "caption": "Key Bindings – Default"
+                            // },
+                            // {
+                            //     "command": "open_file",
+                            //     "args": {
+                            //         "file": "${packages}/User/Default (OSX).sublime-keymap",
+                            //         "platform": "OSX"
+                            //     },
+                            //     "caption": "Key Bindings – User"
+                            // },
+                            // {
+                            //     "command": "open_file",
+                            //     "args": {
+                            //         "file": "${packages}/User/Default (Linux).sublime-keymap",
+                            //         "platform": "Linux"
+                            //     },
+                            //     "caption": "Key Bindings – User"
+                            // },
+                            // {
+                            //     "command": "open_file",
+                            //     "args": {
+                            //         "file": "${packages}/User/Default (Windows).sublime-keymap",
+                            //         "platform": "Windows"
+                            //     },
+                            //     "caption": "Key Bindings – User"
+                            // }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
