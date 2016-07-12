@@ -68,12 +68,14 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 				print(output)
 				if output is None:
 					self.progress.stop()
+					print("open -an /Applications/Sublime\ Text.app/ ~/Desktop/"+name);
+					os.system("open -a /Applications/Sublime\ Text.app/ ~/Desktop/"+name)
 					print("cd "+desktop+"/"+name+"/rn && npm update ")
-					def _C9(output):
+					def _C9(output1):
 						print(output)
 						self.progress = SH.ProgressDisplay(self.view, "Enjoy", "安装依赖...", 250)
 						self.progress.start()
-						if output is None:
+						if output1 is None:
 							self.progress.stop()
 							sublime.message_dialog("项目"+name+"准备就绪,开始你的enjoy之旅")
 
