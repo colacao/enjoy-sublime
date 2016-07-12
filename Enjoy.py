@@ -8,8 +8,10 @@ from . import SublimeHelper as SH
 from . import OsShell
 class EnjoyCommand(sublime_plugin.TextCommand):
 	def get_settings(self):
-	  settings = sublime.load_settings('Enjoy.sublime-settings')
-	  return settings
+		settings = self.view.settings().get('Enjoy')
+		if settings is None:
+			settings = sublime.load_settings('Enjoy.sublime-settings')
+		return settings
 
 	def get_view_and_window(self, view=None):
 	  if view is None:
@@ -27,7 +29,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 	def run(self, edit,**args):
 		self.rn = self.get_settings().get('rn-path')
 		self.enjoy = self.get_settings().get('enjoy-path')
-
+		print(self.rn)
 		def on_cancel():
 			return
 
