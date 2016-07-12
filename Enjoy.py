@@ -7,12 +7,6 @@ import subprocess
 from . import SublimeHelper as SH
 from . import OsShell
 class EnjoyCommand(sublime_plugin.TextCommand):
-	def __init__(self,num):
-		self.rn = self.get_settings().get('rn-path')
-		self.enjoy = self.get_settings().get('enjoy-path')
-		print(self.rn)
-		print(self.enjoy)
-
 	def get_settings(self):
 	  settings = sublime.load_settings('Enjoy.sublime-settings')
 	  return settings
@@ -31,7 +25,9 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 	  return view, window
 
 	def run(self, edit,**args):
-		
+		self.rn = self.get_settings().get('rn-path')
+		self.enjoy = self.get_settings().get('enjoy-path')
+
 		def on_cancel():
 			return
 
@@ -74,7 +70,9 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			OsShell.process("cd "+desktop+" "+" && "+self.enjoy+" init " + name,_C2)
 		 
 
-
+		LOCAL = '/usr/local/bin:/usr/local/sbin:/Users/user/.node/bin'
+		os.environ['PATH'] += ':'
+		os.environ['PATH'] += LOCAL
 		dirs = self.view.window().extract_variables()
 		self.view = self.get_view_and_window()[0]
 		
@@ -100,9 +98,10 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
 				self.progress.start()
 				def _C2(output):
+					print(output)
 					if output is None:
 						self.progress.stop()
-
+				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
 				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --rn",_C2)
 
 
@@ -133,4 +132,3 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 		else:
 			if (not args['id']=="init"):
 				sublime.message_dialog("当前文件不属于enjoy项目")
-

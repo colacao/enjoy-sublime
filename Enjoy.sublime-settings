@@ -1,4 +1,4 @@
 {
-	"rn-path" : "react-native",///Users/user/.node/bin/enjoy
-	"enjoy-path" : "enjoy"///Users/user/.node/bin/react-native
+	"rn-path" : "/Users/user/.node/bin/react-native",
+	"enjoy-path" : "/Users/user/.node/bin/enjoy"
 }
