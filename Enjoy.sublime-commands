@@ -16,7 +16,7 @@
 
     },
      {
-        "caption": "Enjoy:Run android",
+        "caption": "Enjoy:Run Android",
         "command": "enjoy",
         "args":{"id": "run","value":"android"}
     },
@@ -30,7 +30,7 @@
         "args":{"id": "build","value":"ios"}
     },
     {
-        "caption": "Enjoy:Build andrlid",
+        "caption": "Enjoy:Build Android",
         "command": "enjoy",
         "args":{"id": "build","value":"android"}
     },

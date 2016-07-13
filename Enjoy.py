@@ -72,7 +72,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					os.system("open -a /Applications/Sublime\ Text.app/ ~/Desktop/"+name)
 					print("cd "+desktop+"/"+name+"/rn && npm update ")
 					def _C9(output1):
-						print(output)
+						print(output1)
 						self.progress = SH.ProgressDisplay(self.view, "Enjoy", "安装依赖...", 250)
 						self.progress.start()
 						if output1 is None:
@@ -82,6 +82,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 
 					OsShell.process("cd "+desktop+"/"+name+"/rn && npm update ",_C9)
 
+			print("---------------cd "+desktop+" "+" && "+self.enjoy+" init " + name)
 			OsShell.process("cd "+desktop+" "+" && "+self.enjoy+" init " + name,_C2)
 		 
 
