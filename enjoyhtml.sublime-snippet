@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+<html>
+	<head>
+		<title>Hello Enjoy</title>
+		<left>
+			<a></a>
+		</left>
+		<right>
+			<a>筛选</a>
+		</right>
+	</head>
+	<body>
+		<div class="main">
+			${1}
+		</div>
+	</body>
+</html>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

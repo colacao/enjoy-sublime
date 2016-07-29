@@ -1,0 +1,40 @@
+<snippet>
+	<content><![CDATA[
+head a{
+	color: #666;
+}
+body{
+	background-color: #eee;
+}
+.main{
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+.banner-container{
+	margin-top: 44px;
+	-ios-margin-top: 64px;
+	height: 200px;
+	overflow: hidden;
+}
+.banner-content{
+	height: 200px;
+}
+.item1{
+	background-color: #fff;
+	height: 40px;
+	margin: 10px;
+}
+.item1 a{
+	display: block;
+	color:red;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,49 @@
+<snippet>
+	<content><![CDATA[
+var { Component, layers, NodeMethods, Screen, Trap, GuideMask, Storage, Toast, Cookie,Platform } = Enjoy;
+
+//弹出层
+@layers({
+
+})
+//loading
+@loading
+export default class ${1} extends Component {
+	constructor(props){
+		super(props);
+		this.configState();
+	}
+	//初始化状态
+	configState(){
+		this.state = {
+		
+		};
+	}
+	//从下页回来事件
+	onBackFrom(url){
+
+	}
+	//离开当前页事件
+	onForwardTo(){
+		
+	
+	}
+	//即将挂载
+	componentWillMount(){
+		super.componentWillMount();
+	}
+	//已经挂载
+	componentDidMount(){
+		super.componentDidMount();
+	}
+	//销毁时
+	componentWillUnmount(){
+
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

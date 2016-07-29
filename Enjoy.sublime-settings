@@ -1,5 +1,5 @@
 {
 	"node-path" : "C:\\Program Files\\nodejs",
-	"rn-path" : "react-native",
-	"enjoy-path" : "enjoy"
+	"rn-path" : "/User/user/.node/bin/react-native",
+	"enjoy-path" : "/User/user/.node/bin/enjoy"
 }
