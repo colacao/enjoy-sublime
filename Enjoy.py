@@ -111,7 +111,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 				OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" start",_C2)
 
 
-			if(enjoy and  args['id']=="build" and not args['value']=="h5"):
+			if(enjoy and  args['id']=="build" and (args['value']=="ios" or args['value']=="android")):
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
 				self.progress.start()
 				def _C2(output):
@@ -122,17 +122,17 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 				OsShell.process("cd "+enjoy+""+" && "+"enjoy build --rn",_C2)
 
 
-			if(enjoy and args['id']=="build" and args['value']=="h5"):
-				print("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web && webpack")
+			if(enjoy and args['id']=="build" and (args['value']=="h5" or args['value']=="weixin")):
+				print("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack")
 				# abc = os.popen("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
-				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
 				self.progress.start()
 				def _C2(output):
 					print(output)
 					if output is None:
 						self.progress.stop()
 
-				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web && webpack",_C2)
+				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack",_C2)
 
 			if(enjoy and  args['id']=="run"):
 				print("cd "+enjoy+""+" && "+self.enjoy+" run --"+args['value'])

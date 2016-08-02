@@ -6,8 +6,7 @@ var { Component, layers, NodeMethods, Screen, Trap, GuideMask, Storage, Toast, C
 @layers({
 
 })
-//loading
-@loading
+//@loading
 export default class ${1} extends Component {
 	constructor(props){
 		super(props);
