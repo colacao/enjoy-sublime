@@ -134,17 +134,16 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 
 				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack",_C2)
 
-			if(enjoy and  args['id']=="run"):
+			if(enjoy and  args['id']=="run" and (args['value']=="h5" or args['value']=="weixin")):
 				print("cd "+enjoy+""+" && "+self.enjoy+" run --"+args['value'])
-				# os.system("cd "+enjoy+""+" && "+"enjoy run --"+args['value'])
-				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "创建中...", 250)
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "运行中...", 250)
 				self.progress.start()
 				def _C2(output):
 					print(output)
 					if output is None:
 						self.progress.stop()
 
-				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" run --"+args['value'],_C2)
+				OsShell.process("open -a '/Applications/Google Chrome.app' 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html'",_C2)
 		 
 		else:
 			if (not args['id']=="init"):
