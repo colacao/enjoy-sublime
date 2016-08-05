@@ -21,27 +21,43 @@
         "args":{"id": "run","value":"android"}
     },
      {
-        "caption": "Enjoy:Run h5",
+        "caption": "Enjoy:Run H5",
         "command": "enjoy",
-        "args":{"id": "run","value":"h5"}
+        "args":{"id": "run","value":"H5"}
     }, {
-        "caption": "Enjoy:Build iOS",
+        "caption": "Enjoy:Build Native",
         "command": "enjoy",
         "args":{"id": "build","value":"ios"}
     },
+
     {
-        "caption": "Enjoy:Build Android",
+        "caption": "Enjoy:Build H5",
         "command": "enjoy",
-        "args":{"id": "build","value":"android"}
-    },
-    {
-        "caption": "Enjoy:Build h5",
-        "command": "enjoy",
-        "args":{"id": "build","value":"h5"}
+        "args":{"id": "build","value":"H5"}
     },
      {
-        "caption": "Enjoy:Build weixin",
+        "caption": "Enjoy:Build Weixin",
         "command": "enjoy",
         "args":{"id": "build","value":"weixin"}
+    },
+     {
+        "caption": "Enjoy:Pack iOS",
+        "command": "enjoy",
+        "args":{"id": "pack","value":"iOS"}
+    },
+    {
+        "caption": "Enjoy:Pack Android",
+        "command": "enjoy",
+        "args":{"id": "pack","value":"Android"}
+    },
+    {
+        "caption": "Enjoy:Pack H5",
+        "command": "enjoy",
+        "args":{"id": "pack","value":"H5"}
+    },
+    {
+        "caption": "Enjoy:Pack Weixin",
+        "command": "enjoy",
+        "args":{"id": "pack","value":"Weixin"}
     }
 ]
