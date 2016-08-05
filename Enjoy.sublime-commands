@@ -23,7 +23,7 @@
      {
         "caption": "Enjoy:Run H5",
         "command": "enjoy",
-        "args":{"id": "run","value":"H5"}
+        "args":{"id": "run","value":"h5"}
     }, {
         "caption": "Enjoy:Build Native",
         "command": "enjoy",
