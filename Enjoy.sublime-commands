@@ -33,7 +33,7 @@
     {
         "caption": "Enjoy:Build H5",
         "command": "enjoy",
-        "args":{"id": "build","value":"H5"}
+        "args":{"id": "build","value":"h5"}
     },
      {
         "caption": "Enjoy:Build Weixin",
@@ -53,7 +53,7 @@
     {
         "caption": "Enjoy:Pack H5",
         "command": "enjoy",
-        "args":{"id": "pack","value":"H5"}
+        "args":{"id": "pack","value":"h5"}
     },
     {
         "caption": "Enjoy:Pack Weixin",
