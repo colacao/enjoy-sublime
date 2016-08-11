@@ -164,7 +164,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 				if(sublime.platform() == "windows"):
 					SideBarOpenInBrowserThread('','','').try_open("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html","chrome")
 				else:
-					OsShell.process("open -a '/Applications/Google Chrome.app' 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security")
+					OsShell.process("open -a Google\ Chrome --args --disable-web-security --user-data-dir  file://"+enjoy+"/web/"+args['value']+"/bundle/index.html")
 		 
 		else:
 			if (not args['id']=="init"):
