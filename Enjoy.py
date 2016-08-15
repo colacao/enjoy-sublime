@@ -133,6 +133,22 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 
 				OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" start",_C2)
 
+			if(enjoy and  args['id']=="pack" and (args['value']=="ios" or args['value']=="android")):
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "打包中...", 250)
+				self.progress.start()
+				def _C2(output):
+					print(output)
+					if output is None:
+						self.progress.stop()
+						sublime.message_dialog("打包完成")
+						print("open  "+enjoy+" /rn/"+args['value']+"/bundle/")
+						OsShell.process("open  "+enjoy+"/rn/"+args['value']+"/bundle/")
+
+				if(args['value']=="ios"):
+					OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false",_C2)
+				else:
+					OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" bundle --entry-file index.android.js --bundle-output ./android/bundle/index.android.jsbundle --platform android --assets-dest ./android/bundle --dev false",_C2)
+
 
 			if(enjoy and  args['id']=="build" and (args['value']=="ios" or args['value']=="android")):
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
@@ -141,6 +157,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					print(output)
 					if output is None:
 						self.progress.stop()
+
 				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
 				OsShell.process("cd "+enjoy+""+" && "+"enjoy build --rn",_C2)
 
@@ -157,15 +174,29 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 
 				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack",_C2)
 
+			if(enjoy and  args['id']=="run" and (args['value']=="ios")):
+				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
+
+				arr = enjoy.split('/')
+				pname = arr[len(arr)-1]
+				OsShell.process("open "+enjoy+"/rn/ios/"+pname+".xcodeproj/")
+
 
 			if(enjoy and  args['id']=="run" and (args['value']=="h5" or args['value']=="weixin")):
 				print("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html")
+				def _C2(output):
+					print(output)
+					if(output and output.find('does not exist')>=0):
+						sublime.message_dialog("请先编译")
+				
 
 				if(sublime.platform() == "windows"):
 					SideBarOpenInBrowserThread('','','').try_open("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html","chrome")
 				else:
-					OsShell.process("open -a Google\ Chrome --args --disable-web-security --user-data-dir  file://"+enjoy+"/web/"+args['value']+"/bundle/index.html")
-		 
+					print("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir")
+					ret = OsShell.process("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir",_C2)
+					print(ret)
+
 		else:
 			if (not args['id']=="init"):
 				sublime.message_dialog("当前文件不属于enjoy项目")

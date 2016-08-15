@@ -43,12 +43,12 @@
      {
         "caption": "Enjoy:Pack iOS",
         "command": "enjoy",
-        "args":{"id": "pack","value":"iOS"}
+        "args":{"id": "pack","value":"ios"}
     },
     {
         "caption": "Enjoy:Pack Android",
         "command": "enjoy",
-        "args":{"id": "pack","value":"Android"}
+        "args":{"id": "pack","value":"android"}
     },
     {
         "caption": "Enjoy:Pack H5",
