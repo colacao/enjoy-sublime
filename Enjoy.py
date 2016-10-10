@@ -471,3 +471,5 @@ class SideBarOpenInBrowserThread(threading.Thread):
 			pass
 
 		sublime.error_message('Browser "'+browser+'" not found!\nIs installed? Which location...?')
+
+		# master
