@@ -13,6 +13,7 @@ from . import OsShell
 global Pref, s, Cache
 Pref = {}
 s = {}
+# test
 class EnjoyCommand(sublime_plugin.TextCommand):
 	def get_settings(self):
 		settings = self.view.settings().get('Enjoy')
