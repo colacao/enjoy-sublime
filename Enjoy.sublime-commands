@@ -1,10 +1,30 @@
 [
     {
-        "caption": "Enjoy:start ",
+        "caption": "Enjoy:Start iOS",
         "command": "enjoy",
-        "args":{"id": "start","value":""}
+        "args":{"id": "start","value":"ios"}
     },
-   	{
+    {
+        "caption": "Enjoy:Start Android",
+        "command": "enjoy",
+        "args":{"id": "start","value":"anroid"}
+    },
+    {
+        "caption": "Enjoy:Start H5",
+        "command": "enjoy",
+        "args":{"id": "start","value":"h5"}
+    },
+    {
+        "caption": "Enjoy:Start WeiXin",
+        "command": "enjoy",
+        "args":{"id": "start","value":"weixin"}
+    },
+    {
+        "caption": "Enjoy:Start QQ",
+        "command": "enjoy",
+        "args":{"id": "start","value":"qq"}
+    },
+    {
         "caption": "Enjoy:init ",
         "command": "enjoy",
         "args":{"id": "init","value":""}
@@ -21,43 +41,66 @@
         "args":{"id": "run","value":"android"}
     },
      {
-        "caption": "Enjoy:Run H5",
+        "caption": "Enjoy:Run h5",
         "command": "enjoy",
         "args":{"id": "run","value":"h5"}
     }, {
-        "caption": "Enjoy:Build Native",
+        "caption": "Enjoy:Build RN",
         "command": "enjoy",
-        "args":{"id": "build","value":"ios"}
+        "args":{"id": "build","value":"rn"}
     },
-
     {
-        "caption": "Enjoy:Build H5",
+        "caption": "Enjoy:Build Web",
         "command": "enjoy",
-        "args":{"id": "build","value":"h5"}
+        "args":{"id": "build","value":"web"}
     },
-     {
-        "caption": "Enjoy:Build Weixin",
+    {
+        "caption": "Enjoy:Bundle iOS",
         "command": "enjoy",
-        "args":{"id": "build","value":"weixin"}
+        "args":{"id": "bundle","value":"ios"}
+    }, {
+        "caption": "Enjoy:Bundle Android",
+        "command": "enjoy",
+        "args":{"id": "bundle","value":"android"}
     },
-     {
+    {
+        "caption": "Enjoy:Bundle H5",
+        "command": "enjoy",
+        "args":{"id": "bundle","value":"h5"}
+    },{
+        "caption": "Enjoy:Bundle WeiXin",
+        "command": "enjoy",
+        "args":{"id": "bundle","value":"weixin"}
+    },{
+        "caption": "Enjoy:Bundle QQ",
+        "command": "enjoy",
+        "args":{"id": "bundle","value":"qq"}
+    },
+    {
         "caption": "Enjoy:Pack iOS",
         "command": "enjoy",
         "args":{"id": "pack","value":"ios"}
     },
     {
-        "caption": "Enjoy:Pack Android",
+        "caption": "Enjoy:Build && Bundle iOS",
         "command": "enjoy",
-        "args":{"id": "pack","value":"android"}
+        "args":{"id": "bb","value":"ios"}
+    }, {
+        "caption": "Enjoy:Build && Bundle Android",
+        "command": "enjoy",
+        "args":{"id": "bb","value":"android"}
     },
     {
-        "caption": "Enjoy:Pack H5",
+        "caption": "Enjoy:Build &&  H5",
         "command": "enjoy",
-        "args":{"id": "pack","value":"h5"}
-    },
-    {
-        "caption": "Enjoy:Pack Weixin",
+        "args":{"id": "bb","value":"h5"}
+    },{
+        "caption": "Enjoy:Build &&  WeiXin",
         "command": "enjoy",
-        "args":{"id": "pack","value":"Weixin"}
-    }
+        "args":{"id": "bb","value":"weixin"}
+    },{
+        "caption": "Enjoy:Build &&  QQ",
+        "command": "enjoy",
+        "args":{"id": "bb","value":"qq"}
+    }, 
 ]

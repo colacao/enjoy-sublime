@@ -14,6 +14,7 @@ global Pref, s, Cache
 Pref = {}
 s = {}
 class EnjoyCommand(sublime_plugin.TextCommand):
+
 	def get_settings(self):
 		settings = self.view.settings().get('Enjoy')
 		if settings is None:
@@ -38,7 +39,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 	def run(self, edit,**args):
 		self.rn = self.get_settings().get('rn-path')
 		self.enjoy = self.get_settings().get('enjoy-path')
-
+		self.MD_5=""
 		def win_browser_open(url):
 			if url.startswith('file:///'):
 				browser = _winreg.QueryValue(_winreg.HKEY_CLASSES_ROOT, r'http\shell\open\command')
@@ -93,25 +94,23 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					self.progress.stop()
 					print("open -an /Applications/Sublime\ Text.app/ ~/Desktop/"+name);
 					os.system("open -a /Applications/Sublime\ Text.app/ ~/Desktop/"+name)
-					print("cd "+desktop+"/"+name+"/rn && npm update ")
-					def _C9(output1):
-						print(output1)
-						self.progress = SH.ProgressDisplay(self.view, "Enjoy", "安装依赖...", 250)
-						self.progress.start()
-						if output1 is None:
-							self.progress.stop()
-							sublime.message_dialog("项目"+name+"准备就绪,开始你的enjoy之旅")
+					sublime.message_dialog("项目"+name+"准备就绪,开始你的enjoy之旅")
+					# def _C9(output1):
+					# 	print(output1)
+					# 	self.progress = SH.ProgressDisplay(self.view, "Enjoy", "安装依赖...", 250)
+					# 	self.progress.start()
+					# 	if output1 is None:
+					# 		self.progress.stop()
+					# 		sublime.message_dialog("项目"+name+"准备就绪,开始你的enjoy之旅")
 
 
-					OsShell.process("cd "+desktop+"/"+name+"/rn && npm update ",_C9)
+					# OsShell.process("cd "+desktop+"/"+name+"/rn && npm update ",_C9)
 
 			print("---------------cd "+desktop+" "+" && "+self.enjoy+" init " + name)
 			OsShell.process("cd "+desktop+" "+" && "+self.enjoy+" init " + name,_C2)
 		 
 
 		LOCAL = '/usr/local/bin:/usr/local/sbin:~/.node/bin'
-		
-
 		os.environ['PATH'] += ':'
 		os.environ['PATH'] += LOCAL
 		dirs = self.view.window().extract_variables()
@@ -124,7 +123,7 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 			dir1 = dirs['file_path']
 			enjoy = checkenjoy(dir1)
 			if(enjoy and args['id']=="start"):
-				print("cd "+enjoy+"/rn"+" && "+self.rn+" start")
+				print("cd "+enjoy+" && enjoy start")
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "服务启动中...", 250)
 				self.progress.start()
 				def _C2(output):
@@ -133,36 +132,35 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 						self.progress.stop()
 
 
-				OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" start",_C2)
+				OsShell.process("cd " + enjoy  + " && enjoy start --"+args['value'],_C2)
 
 			if(enjoy and  args['id']=="pack" and (args['value']=="ios" or args['value']=="android")):
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "打包中...", 250)
 				self.progress.start()
-				MD_5 = ""
 				def _C2(output):
 					if output is not None:
 						md5=output.split(" = ")
 						if len(md5)>1:
-							# sublime.message_dialog(md5[1])
-							global MD_5
-							MD_5 = md5[1]
+							sublime.message_dialog(md5[1])
+							self.MD_5 = md5[1]
 
 					if output is None:
 						self.progress.stop()
-						zipname = ("discover_package-"+MD_5.strip('\n')+".zip")
-						cmd="/usr/bin/zip '"+(enjoy+"/rn/"+args['value']+"/bundle/"+zipname)+"' '"+(enjoy+"/rn/"+args['value']+"/bundle/discover_package.tar'"+"&& open  "+enjoy+"/rn/"+args['value']+"/bundle/")
+						zipname = ("discover_package-"+self.MD_5.strip('\n')+".zip")
+						print(zipname)
+						cmd="/usr/bin/zip '"+(enjoy+"/rn/"+args['value']+"/bundle/"+zipname)+"' '"+(enjoy+"/rn/"+args['value']+"/bundle/discover_package.tar'"+" && open  "+enjoy+"/rn/"+args['value']+"/bundle/")
 						print(cmd)
 						OsShell.process(cmd)
 
 
 				if(args['value']=="ios"):
-					# print("cd "+enjoy+"/rn"+" &&"+self.rn+" bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false")
-					OsShell.process("cd "+enjoy+"/rn"+" &&"+self.rn+" bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false &&"+"cd "+enjoy+"/rn/ios/bundle && tar -cvf discover_package.tar assets/ index.ios.jsbundle && md5 discover_package.tar",_C2)
+					print("cd "+enjoy+"/rn"+" && "+self.rn+" bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false &&"+"cd "+enjoy+"/rn/ios/bundle && tar -cvf discover_package.tar assets/ index.ios.jsbundle && md5 discover_package.tar")
+					OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" bundle --entry-file index.ios.js --bundle-output ./ios/bundle/index.ios.jsbundle --platform ios --assets-dest ./ios/bundle --dev false && "+"cd "+enjoy+"/rn/ios/bundle && tar -cvf discover_package.tar assets/ index.ios.jsbundle && md5 discover_package.tar",_C2)
 				else:
 					OsShell.process("cd "+enjoy+"/rn"+" && "+self.rn+" bundle --entry-file index.android.js --bundle-output ./android/bundle/index.android.jsbundle --platform android --assets-dest ./android/bundle --dev false",_C2)
 
 
-			if(enjoy and  args['id']=="build" and (args['value']=="ios" or args['value']=="android")):
+			if(enjoy and  args['id']=="build" and (args['value']=="rn" or args['value']=="web")):
 				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
 				self.progress.start()
 				def _C2(output):
@@ -170,44 +168,62 @@ class EnjoyCommand(sublime_plugin.TextCommand):
 					if output is None:
 						self.progress.stop()
 
-				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
-				OsShell.process("cd "+enjoy+""+" && "+"enjoy build --rn",_C2)
+				print("cd "+enjoy+""+" && "+self.enjoy+" build --"+args['value'])
+				OsShell.process("cd "+enjoy+""+" && "+"enjoy build --"+args['value'],_C2)
 
-
-			if(enjoy and args['id']=="build" and (args['value']=="h5" or args['value']=="weixin")):
-				print("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack")
-				# abc = os.popen("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
-				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
+			if(enjoy and  args['id']=="bundle"):
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "打包中...", 250)
 				self.progress.start()
 				def _C2(output):
 					print(output)
 					if output is None:
 						self.progress.stop()
 
-				OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack",_C2)
+				print("cd "+enjoy+""+" && enjoy bundle --"+args['value'])
+				OsShell.process("cd "+enjoy+""+" && "+"enjoy bundle --"+args['value']+" --dev",_C2)
 
-			if(enjoy and  args['id']=="run" and (args['value']=="ios")):
-				print("cd "+enjoy+""+" && "+self.enjoy+" build --rn")
+			if(enjoy and  args['id']=="bb"):
+				self.progress = SH.ProgressDisplay(self.view, "Enjoy", "打包中...", 250)
+				self.progress.start()
+				def _C2(output):
+					print(output)
+					if output is None:
+						self.progress.stop()
 
+				print("cd "+enjoy+""+" && enjoy bundle --"+args['value'])
+				OsShell.process("cd "+enjoy+""+" && "+"enjoy bundle --"+args['value']+" --dev",_C2)
+			# if(enjoy and args['id']=="build" and (args['value']=="h5" or args['value']=="weixin")):
+			# 	print("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack")
+			# 	# abc = os.popen("cd "+enjoy+""+" && "+"enjoy build --web && cd web && webpack")
+			# 	self.progress = SH.ProgressDisplay(self.view, "Enjoy", "编译中...", 250)
+			# 	self.progress.start()
+			# 	def _C2(output):
+			# 		print(output)
+			# 		if output is None:
+			# 			self.progress.stop()
+
+			# 	OsShell.process("cd "+enjoy+""+" && "+self.enjoy+" build --web && cd web/"+args['value']+" && webpack",_C2)
+
+			if(enjoy and  args['id']=="run"):
 				arr = enjoy.split('/')
 				pname = arr[len(arr)-1]
-				OsShell.process("open "+enjoy+"/rn/ios/"+pname+".xcodeproj/")
+				OsShell.process("cd "+enjoy+""+" && "+"enjoy run --"+args['value'])
 
 
-			if(enjoy and  args['id']=="run" and (args['value']=="h5" or args['value']=="weixin")):
-				print("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html")
-				def _C2(output):
-					print(output)
-					if(output and output.find('does not exist')>=0):
-						sublime.message_dialog("请先编译")
+			# if(enjoy and  args['id']=="run" and (args['value']=="h5" or args['value']=="weixin")):
+			# 	print("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html")
+			# 	def _C2(output):
+			# 		print(output)
+			# 		if(output and output.find('does not exist')>=0):
+			# 			sublime.message_dialog("请先编译")
 				
 
-				if(sublime.platform() == "windows"):
-					SideBarOpenInBrowserThread('','','').try_open("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html","chrome")
-				else:
-					print("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir")
-					ret = OsShell.process("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir",_C2)
-					print(ret)
+			# 	if(sublime.platform() == "windows"):
+			# 		SideBarOpenInBrowserThread('','','').try_open("file://"+enjoy+"/web/"+args['value']+"/bundle/index.html","chrome")
+			# 	else:
+			# 		print("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir")
+			# 		ret = OsShell.process("open -a Google\ Chrome 'file://"+enjoy+"/web/"+args['value']+"/bundle/index.html' --args --disable-web-security --user-data-dir",_C2)
+			# 		print(ret)
 
 		else:
 			if (not args['id']=="init"):
