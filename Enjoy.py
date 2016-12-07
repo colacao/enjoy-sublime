@@ -13,6 +13,7 @@ from . import OsShell
 global Pref, s, Cache
 Pref = {}
 s = {}
+# test
 class EnjoyCommand(sublime_plugin.TextCommand):
 
 	def get_settings(self):
@@ -487,3 +488,5 @@ class SideBarOpenInBrowserThread(threading.Thread):
 			pass
 
 		sublime.error_message('Browser "'+browser+'" not found!\nIs installed? Which location...?')
+
+		# master
